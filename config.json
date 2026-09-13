@@ -1,8 +1,11 @@
 {
-  files: {
-    id: "remote1",
-    name: "key",
-    url: "https://mosbyxsy.github.io/test/key.xlsx",
-    type: "xlsx"
-  }
+  "files": [
+    {
+      "id": "remote1",
+      "name": "远端配置测试文件",
+      "url": "https://mosbyxsy.github.io/test/key.xlsx",
+      "type": "xlsx",
+      "action": "open"
+    }
+  ]
 }
