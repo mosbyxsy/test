@@ -1,0 +1,8 @@
+{
+  files: {
+    id: "remote1",
+    name: "key",
+    url: "https://mosbyxsy.github.io/test/key.xlsx",
+    type: "xlsx"
+  }
+}
