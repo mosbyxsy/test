@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>数据站 · 文件浏览与预览</title>
+    <link rel="icon" type="image/svg+xml" href="./file-browser/logo.svg">
+    <link rel="stylesheet" href="./file-browser/styles.css">
+    <script src="./file-browser/catalog-data.js" defer></script>
+    <script src="./file-browser/app.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="brand">
+        <img class="brand-icon" src="./file-browser/logo.svg" alt="" width="44" height="44">
+        <div>
+          <h1>数据站</h1>
+          <p>文件浏览与预览</p>
+        </div>
+      </div>
+      <span id="scan-time" class="scan-time"></span>
+      <button id="open-mobile-directory" class="mobile-directory-button" type="button" aria-haspopup="dialog" aria-controls="mobile-directory-dialog">目录</button>
+    </header>
+    <div class="workspace">
+      <aside class="directory-sidebar" aria-label="目录导航">
+        <h2>目录树</h2>
+        <nav id="directory-tree" aria-label="文件夹"></nav>
+      </aside>
+      <div id="directory-resizer" class="directory-resizer" role="separator" aria-label="调整目录树宽度" aria-orientation="vertical" aria-valuemin="120" aria-valuemax="480" aria-valuenow="240" tabindex="0"></div>
+      <main class="file-panel">
+        <nav id="breadcrumbs" class="breadcrumbs" aria-label="当前位置"></nav>
+        <div class="section-heading">
+          <div>
+            <h2 id="directory-title">文件</h2>
+            <p id="item-count"></p>
+          </div>
+          <button id="parent-directory" type="button">↑ 上级目录</button>
+        </div>
+        <form class="toolbar" role="search">
+          <label class="search-field">
+            <span aria-hidden="true">⌕</span>
+            <input id="search" type="search" aria-label="搜索所有文件和文件夹" placeholder="搜索所有文件和文件夹…">
+          </label>
+          <div class="type-filter-field">
+            <select id="type-filter" aria-label="文件类型">
+              <option value="all">全部类型</option>
+              <option value="directory">文件夹</option>
+              <option value="text">文本 / 代码</option>
+              <option value="delimited">CSV / TSV</option>
+              <option value="markdown">Markdown</option>
+              <option value="word">Word</option>
+              <option value="sheet">Excel</option>
+              <option value="slides">PowerPoint</option>
+              <option value="image">图片</option>
+              <option value="audio">音频</option>
+              <option value="video">视频</option>
+              <option value="pdf">PDF</option>
+              <option value="other">其他格式</option>
+            </select>
+          </div>
+        </form>
+        <div class="table-scroll">
+          <table class="file-table">
+            <thead>
+              <tr>
+                <th scope="col"><button data-sort="name">名称 ↕</button></th>
+                <th scope="col">类型</th>
+                <th scope="col"><button data-sort="size">大小 ↕</button></th>
+                <th scope="col"><button data-sort="modifiedAt">修改时间 ↕</button></th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            <tbody id="file-list"></tbody>
+          </table>
+        </div>
+        <button id="load-more-files" class="load-more-files" type="button" hidden>加载更多</button>
+        <p id="empty-message" class="empty-message" hidden></p>
+      </main>
+      <section id="preview-panel" class="preview-panel" aria-label="文件预览" hidden>
+        <header class="preview-header">
+          <div class="preview-heading">
+            <span class="preview-indicator" aria-hidden="true"></span>
+            <h2>文件预览</h2>
+          </div>
+          <div class="preview-header-actions">
+            <a id="download-file" class="primary-button" download>↓ 下载</a>
+            <button id="fullscreen" type="button">全屏查看</button>
+            <button id="close-preview" type="button" aria-label="关闭预览" title="关闭预览">✕</button>
+          </div>
+        </header>
+        <div class="preview-information">
+          <div class="preview-title">
+            <span id="preview-file-icon" class="preview-file-icon" aria-hidden="true"></span>
+            <div class="preview-file-heading">
+              <h3 id="preview-name"></h3>
+              <div class="preview-file-meta">
+                <p id="preview-metadata"></p>
+                <span class="preview-modified-label">修改于 <time id="preview-modified"></time></span>
+              </div>
+            </div>
+            <button id="toggle-svg-source" class="details-text-button" type="button" hidden>查看源码</button>
+            <button id="format-json" class="details-text-button" type="button" aria-pressed="false" hidden>格式化</button>
+            <button id="open-file-details" class="details-text-button" type="button" aria-haspopup="dialog" aria-controls="file-details-dialog">详情</button>
+          </div>
+        </div>
+        <div id="preview-content" class="preview-content" aria-live="polite"></div>
+        <footer class="preview-footer"><span id="preview-mode">内容预览</span><span>只读预览</span></footer>
+      </section>
+    </div>
+    <dialog id="mobile-directory-dialog" class="mobile-directory-dialog" aria-labelledby="mobile-directory-title">
+      <header class="details-dialog-header"><h2 id="mobile-directory-title">目录导航</h2><button id="close-mobile-directory" type="button" aria-label="关闭目录">✕</button></header>
+      <div id="mobile-directory-content" class="mobile-directory-content"></div>
+    </dialog>
+    <dialog id="file-details-dialog" class="file-details-dialog" aria-labelledby="file-details-title">
+      <header class="details-dialog-header"><h2 id="file-details-title">详情</h2><button id="close-file-details" type="button" aria-label="关闭详情">✕</button></header>
+      <div class="details-dialog-body">
+        <dl id="preview-file-details" class="preview-file-details"></dl>
+        <div class="details-dialog-address">
+          <div class="preview-path-heading"><span>完整文件地址</span><button id="copy-preview-path" type="button">复制地址</button></div>
+          <p id="preview-path"></p>
+        </div>
+      </div>
+    </dialog>
+    <footer class="status-bar"><span id="catalog-summary"></span><span id="error-summary"></span></footer>
+    <div id="action-feedback" class="action-feedback" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>

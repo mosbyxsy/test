@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>数据站</title>
+  <!-- 文件夹轮廓与目录节点融合，小尺寸下仍保留清晰的辨识度。 -->
+  <rect width="64" height="64" rx="16" fill="#2869ED"/>
+  <path d="M13 22a5 5 0 0 1 5-5h10l6 6h12a5 5 0 0 1 5 5v17a5 5 0 0 1-5 5H18a5 5 0 0 1-5-5V22Z" fill="#fff"/>
+  <path d="M23 29v12h15M23 33h15" stroke="#2869ED" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="34" y="29" width="9" height="8" rx="2.5" fill="#2869ED"/>
+  <rect x="34" y="37" width="9" height="8" rx="2.5" fill="#2869ED"/>
+</svg>

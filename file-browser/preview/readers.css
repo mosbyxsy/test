@@ -1,0 +1,248 @@
+/* 富文本和工作表样式仅作用于内容区，避免文件列表的表格规则污染文档。 */
+.document-reader {
+  padding: 24px;
+  color: #34445c;
+  font-size: 14px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+.document-reader h1, .document-reader h2, .document-reader h3, .document-reader h4 {
+  margin: 1.2em 0 .6em;
+  line-height: 1.4;
+  color: #1d304c;
+}
+.document-reader h1 {
+  font-size: 25px;
+}
+.document-reader h2 {
+  font-size: 21px;
+}
+.document-reader h3 {
+  font-size: 18px;
+}
+.document-reader p, .document-reader ul, .document-reader ol {
+  margin: 0 0 1em;
+  white-space: pre-wrap;
+}
+.document-reader pre {
+  margin: 14px 0;
+  padding: 16px;
+  background: #f2f5fa;
+  border-radius: 7px;
+  white-space: pre-wrap;
+}
+.document-reader :not(pre) > code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: #eff3f9;
+}
+.document-reader blockquote {
+  margin: 14px 0;
+  padding: 8px 16px;
+  border-left: 3px solid #80a5ee;
+  background: #f5f8fd;
+  color: #718098;
+}
+.document-reader img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  margin: 12px 0;
+}
+.document-reader a {
+  color: #2869ed;
+}
+.document-reader table, .spreadsheet-reader table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+  white-space: normal;
+}
+.document-reader thead, .document-reader tbody, .spreadsheet-reader tbody {
+  display: table-row-group;
+}
+.document-reader tr, .spreadsheet-reader tr {
+  display: table-row;
+  background: transparent;
+}
+.preview-content .document-reader th, .preview-content .document-reader td, .preview-content .spreadsheet-reader th, .preview-content .spreadsheet-reader td {
+  display: table-cell;
+  padding: 8px 10px;
+  border: 1px solid #dfe6f1;
+  color: inherit;
+  min-width: 50px;
+}
+.document-reader th, .spreadsheet-reader th {
+  background: #f3f6fa;
+}
+.document-reader input[type="checkbox"] {
+  margin-right: 7px;
+}
+.slide-page {
+  padding: 18px;
+  border: 1px solid #e1e7f0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background: #fff;
+}
+.slide-page > h2:first-child {
+  margin-top: 0;
+  font-size: 13px;
+  color: #8390a5;
+}
+.preview-content[data-category="sheet"], .preview-content[data-category="delimited"] {
+  overflow: hidden;
+}
+.spreadsheet-reader {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  font-size: 12px;
+}
+.reader-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: #f7f9fc;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.reader-toolbar span {
+  color: #8390a5;
+  font-size: 11px;
+}
+.reader-page-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.reader-toolbar select {
+  width: auto;
+  max-width: 180px;
+}
+.sheet-table-scroll {
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+.preview-content .spreadsheet-reader td {
+  white-space: pre-wrap;
+  min-width: 95px;
+  max-width: 360px;
+  overflow-wrap: anywhere;
+}
+.spreadsheet-reader th {
+  position: sticky;
+  left: 0;
+  min-width: 44px;
+}
+/* 行号使用最小布局宽度，避免跟随数据列平均分配剩余空间。 */
+.preview-content .spreadsheet-reader tbody th {
+  width: 1%;
+  min-width: 36px;
+  padding: 8px 6px;
+  white-space: nowrap;
+  text-align: right;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.preview-content .delimited-reader thead {
+  display: table-header-group;
+}
+.delimited-reader thead th {
+  position: sticky;
+  top: 0;
+  left: auto;
+  z-index: 2;
+}
+.delimited-reader thead th:first-child {
+  left: 0;
+  z-index: 3;
+}
+.delimited-reader tbody th {
+  z-index: 1;
+}
+.delimited-reader table {
+  width: max-content;
+  min-width: 100%;
+}
+.preview-content .delimited-reader td {
+  min-width: 120px;
+  max-width: 360px;
+}
+.reader-header-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  white-space: nowrap;
+  font-size: 12px;
+  color: #657188;
+  cursor: pointer;
+}
+.reader-header-option input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--blue);
+}
+@media (max-width: 650px) {
+  .document-reader {
+    padding: 16px;
+    font-size: 14px;
+  }
+  .document-reader table {
+    display: block;
+    overflow-x: auto;
+  }
+  .document-reader td, .document-reader th, .spreadsheet-reader td, .spreadsheet-reader th {
+    display: table-cell;
+    grid-column: auto;
+  }
+  .document-reader tr, .spreadsheet-reader tr {
+    display: table-row;
+    padding: 0;
+  }
+  .reader-toolbar {
+    gap: 6px;
+    padding: 8px;
+  }
+  .reader-toolbar button {
+    min-height: 40px;
+  }
+}
+/* PDF 页面在同一个触摸滚动容器中排列，不将手势交给 iframe 内部。 */
+.preview-content[data-category="pdf"].mobile-pdf {
+  display: block;
+  overflow: auto;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  background: #e8edf4;
+}
+.pdf-pages {
+  width: 100%;
+  padding: 8px;
+}
+.pdf-page {
+  min-height: 0;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: white;
+  color: #8390a5;
+  font-size: 12px;
+  box-shadow: 0 1px 5px #21334d18;
+}
+.pdf-page.rendered {
+  min-height: 0;
+  padding: 0;
+}
+.pdf-page canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
